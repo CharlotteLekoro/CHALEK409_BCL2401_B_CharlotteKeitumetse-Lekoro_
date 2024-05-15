@@ -55,6 +55,15 @@ for (const [id, name] of Object.entries(authors)) {
   authorsHtml.appendChild(element);
 }
 
+function setupEventListeners() {
+    document.querySelector("[data-search-cancel]").addEventListener("click", () => {
+        document.querySelector("[data-search-overlay]").open = false;
+    });
+
+    document.querySelector("[data-settings-cancel]").addEventListener("click", () => {
+        document.querySelector("[data-settings-overlay]").open = false;
+    });
+
 document.querySelector("[data-search-authors]").appendChild(authorsHtml);
 
 if (
