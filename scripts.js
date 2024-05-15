@@ -77,21 +77,44 @@ function setupEventListeners() {
         document.querySelector("[data-list-active]").open = false;
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    document.querySelector("[data-settings-form]").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const { theme } = Object.fromEntries(formData);
+        applyTheme(theme);
+        document.querySelector("[data-settings-overlay]").open = false;
+    });
 
     
+    document.querySelector("[data-search-form]").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const filters = Object.fromEntries(formData);
+        const result = filterBooks(filters);
+        page = 1;
+        matches = result;
+        document.querySelector("[data-list-items]").innerHTML = "";
+        updateBookList(result);
+        updateShowMoreButton(result);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.querySelector("[data-search-overlay]").open = false;
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.querySelector("[data-search-authors]").appendChild(authorsHtml);
 
 if (
